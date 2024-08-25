@@ -1,0 +1,40 @@
+﻿<Window x:Class="prjRoyalFamily_ICE.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:prjRoyalFamily_ICE"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- TreeView for displaying the family tree -->
+        <TreeView x:Name="FamilyTreeView" Grid.Column="0" Margin="10"
+                  ItemsSource="{Binding Root.Children}" 
+                  SelectedItemChanged="FamilyTreeView_SelectedItemChanged">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <TextBlock Text="{Binding Member.Name}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
+        <!-- Controls for search and add operations -->
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Search Member" Margin="0,0,0,5" />
+            <TextBox x:Name="SearchTextBox" Margin="0,0,0,10" />
+            <Button Content="Search" Click="Button_Click" Margin="0,0,0,20" />
+            <TextBlock x:Name="ResultLabel" Margin="0,0,0,10" />
+
+            <TextBlock Text="Add New Member" Margin="0,20,0,5" />
+            <TextBox x:Name="NameTextBox"  Margin="0,0,0,5" />
+            <DatePicker x:Name="DobPicker" Margin="0,0,0,5" />
+            <CheckBox x:Name="IsAliveCheckBox" Content="Is Alive" Margin="0,0,0,10" />
+            <Button Content="Add Member" Click="Button_Click_1" />
+        </StackPanel>
+    </Grid>
+</Window>
